@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./components/layoutContent/layoutContent";
+import Products from "./pages/Products";
+import "./App.css";
+import { RouterProvider, createBrowserRouter, useLocation, useSearchParams } from "react-router-dom";
+import FilterProducts from "./pages/FilterProducts";
+import { useEffect } from "react";
 
+export const router = createBrowserRouter([
+  { path: "/", element: <Layout />, children: [
+      { index: true, element: <Products /> },
+      { path: ':homeType', element: <FilterProducts/>}
+    ],
+  },
+]);
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  // const [searchParams] = useSearchParams();
+  // useEffect(()=>{
+  //   searchParams.get("homeType")
+  // },[searchParams])
+  return <RouterProvider router={router} />;
 }
 
 export default App;
