@@ -6,12 +6,13 @@ function Bedrooms() {
   const dispatch = useDispatch();
   const onSelectHandler = (e) => {
     if(e.target.checked == true){
-      dispatch(productActions.addBedroomsFilter(e.target.value));
+      dispatch(productActions.addBedroomsFilter(Number(e.target.value)));
     }else{
-      dispatch(productActions.deleteBedroomsFilter(e.target.value));
+      dispatch(productActions.deleteBedroomsFilter(Number(e.target.value)));
     }
   }
   const filters = useSelector((state)=>state.products.filters);
+  console.log(filters.bedrooms);
   return (
     <div className="flex flex-col gap-[30px]">
       <p className="text-[18px] font-bold">Number of bedrooms</p>

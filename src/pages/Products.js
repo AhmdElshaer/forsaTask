@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../store/product-slice";
 
 function Products() {
-  const [filteredHome, setfilteredHome] = useState([]);
+  const [updated, setupdated] = useState([]);
   const [waiting, setWaiting] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsData, setProductsData] = useState([]);
@@ -41,12 +41,13 @@ function Products() {
           });
         }
         dispatch(productActions.setProducts(setProducts));
+        setupdated(allProducts);
         setWaiting(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [ProductsEP, dispatch]);
+  }, [ProductsEP]);
 
   useEffect(() => {
     getProductsData();
@@ -54,17 +55,22 @@ function Products() {
 
   const filteredProduct = useCallback(() => {
     let updatedProducts = allProducts;
+    setupdated(updatedProducts);
     if (filters.homeType.length !== 0) {
-      updatedProducts = updatedProducts.filter((product)=> filters.homeType.includes(product.home_type));
-      console.log("type", updatedProducts);
-      // dispatch(productActions.setProducts(updatedProducts));
+      updatedProducts = updatedProducts.filter((product) =>
+        filters.homeType.includes(product.home_type)
+      );
+      setupdated(updatedProducts);
     }
     if (filters.bedrooms.length !== 0) {
-      updatedProducts = updatedProducts.filter((product)=> filters.bedrooms.includes(String(product.bedrooms_no)));
-      console.log("bed", updatedProducts);
-      // dispatch(productActions.setProducts(updatedProducts));
+      updatedProducts = updatedProducts.filter((product) =>
+        filters.bedrooms.includes(product.bedrooms_no)
+      );
+      setupdated(updatedProducts);
     }
   }, [allProducts, filters]);
+
+  console.log(updated);
 
   useEffect(() => {
     filteredProduct();
@@ -81,14 +87,14 @@ function Products() {
       ) : (
         <div className="w-full flex flex-col justify-center items-center gap-6">
           <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-[53px]">
-            {allProducts.length !== 0 &&
-              allProducts?.map((item) => (
+            {updated.length !== 0 &&
+              updated?.map((item) => (
                 <ProductItem
                   key={item.id}
                   image={item.image}
                   price={item.price}
                   address={item.address}
-                  bedrooms_no={item.bathrooms_no}
+                  bedrooms_no={item.bedrooms_no}
                   bathrooms_no={item.bathrooms_no}
                   area={item.area}
                 />
