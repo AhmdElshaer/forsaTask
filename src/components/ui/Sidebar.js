@@ -11,7 +11,7 @@ export default function Sidebar() {
         <p className="text-[24px] font-bold">Filter by:</p>
         <HomeType />
         <PriceRange />
-        <Bedrooms />
+        <Bedrooms/>
         <Area />
         <Furnishings />
       </div>

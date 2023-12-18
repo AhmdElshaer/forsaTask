@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { productActions } from "../../store/product-slice";
 
 function HomeType() {
-  const [filters, setFilters] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const params = new URLSearchParams();
-  console.log(searchParams.get('homeType'));
 
+  const dispatch = useDispatch();
   const onSelectHandler = (e) => {
-    let val = e.target.value;
-    let newFilters = [...filters];
     if(e.target.checked == true){
-      newFilters.push(val);
+      dispatch(productActions.addHomeFilter(e.target.value));
     }else{
-      newFilters = filters.filter(function(item) {
-        return item !== val
-    })
-  }
-  setFilters(newFilters);
-}
-  useEffect(()=>{
-    setSearchParams(()=>{
-      return new URLSearchParams({'homeType': filters})
-    })
-    if(filters.length == 0){
-      setSearchParams(()=>{ return params.delete('homeType')})
+      dispatch(productActions.deleteHomeFilter(e.target.value));
     }
-  },[filters, setSearchParams])
+  }
+
   return (
     <div className="flex flex-col gap-[30px]">
       <p className="text-[18px] font-bold">Type of home</p>
@@ -36,14 +21,14 @@ function HomeType() {
           <input
             className=""
             type="checkbox"
-            value="apartment"
-            id="apartment"
+            value="appartment"
+            id="appartment"
             onChange={onSelectHandler}
           />
           <label
             className="inline-block pl-[0.15rem] hover:cursor-pointer"
-            htmlFor="apartment">
-            Apartment
+            htmlFor="appartment">
+            Appartment
           </label>
         </div>
 
