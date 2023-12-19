@@ -1,20 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { productActions } from "../../store/product-slice";
 
 function Bedrooms() {
 
   const dispatch = useDispatch();
   const onSelectHandler = (e) => {
-    if(e.target.checked == true){
+    if(e.target.checked === true){
       dispatch(productActions.addBedroomsFilter(Number(e.target.value)));
     }else{
       dispatch(productActions.deleteBedroomsFilter(Number(e.target.value)));
     }
   }
-  const filters = useSelector((state)=>state.products.filters);
-  console.log(filters.bedrooms);
+
   return (
-    <div className="flex flex-col gap-[30px]">
+    <div className="flex flex-col gap-[30px] pb-[14px] border-b">
       <p className="text-[18px] font-bold">Number of bedrooms</p>
       <div className="flex flex-col gap-[12px] text-[#6D7888]">
 

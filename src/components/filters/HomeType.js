@@ -5,7 +5,7 @@ function HomeType() {
 
   const dispatch = useDispatch();
   const onSelectHandler = (e) => {
-    if(e.target.checked == true){
+    if(e.target.checked === true){
       dispatch(productActions.addHomeFilter(e.target.value));
     }else{
       dispatch(productActions.deleteHomeFilter(e.target.value));
@@ -13,7 +13,7 @@ function HomeType() {
   }
 
   return (
-    <div className="flex flex-col gap-[30px]">
+    <div className="flex flex-col gap-[30px] pb-[14px] border-b">
       <p className="text-[18px] font-bold">Type of home</p>
       <div className="flex flex-col gap-[12px] text-[#6D7888]">
 

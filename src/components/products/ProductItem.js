@@ -6,7 +6,7 @@ import sqm from "../../assets/images/area.png";
 function ProductItem({image, price, address, bedrooms_no, bathrooms_no, area}) {
   return (
     <div className="">
-      <div className="max-w-[300px] max-h-[218px] rounded-2xl overflow-hidden">
+      <div className="max-w-[300px] h-[218px] rounded-2xl overflow-hidden">
         <img className="object-contain" src={`${image}`} alt="screenimage"/>
       </div>
 
