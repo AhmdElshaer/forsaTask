@@ -12,16 +12,19 @@ export default function Layout() {
   return(
     <>
       <div className="relative">
-        {toggle && <FilterModal />}
         <Header />
-        <main className="p-6 md:p-8 py-[40px] py-[120px] flex flex-col gap-[47px]">
-          <div className="text-[32px]">Explore properties</div>
-          <div className="flex flex-row gap-[35px]">
-          <Sidebar />
-          <Outlet />
-          </div>
-        </main>
-        <FilterButton />
+        {toggle ? <FilterModal /> :
+          <>
+            <main className="p-6 md:p-8 py-[40px] py-[120px] flex flex-col gap-[47px]">
+              <div className="text-[32px]">Explore properties</div>
+              <div className="flex flex-row gap-[35px]">
+              <Sidebar />
+              <Outlet />
+              </div>
+            </main>
+            <FilterButton />
+          </>
+        }
       </div>
       <Footer />
     </>
